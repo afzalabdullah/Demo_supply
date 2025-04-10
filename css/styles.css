@@ -1,0 +1,254 @@
+/* Main Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar Styles */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #343a40;
+    color: #fff;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar .sidebar-header {
+    padding: 20px;
+    background: #212529;
+}
+
+.sidebar ul.components {
+    padding: 20px 0;
+    flex-grow: 1;
+}
+
+.sidebar ul li a {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background: #495057;
+}
+
+.sidebar ul li.active > a {
+    background: #007bff;
+    color: #fff;
+}
+
+.sidebar-footer {
+    padding: 15px;
+    background: #212529;
+}
+
+/* Content Styles */
+.content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-input {
+    padding-right: 40px;
+    width: 300px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #dc3545;
+}
+
+.user-profile {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+}
+
+/* Dashboard Card Styles */
+.dashboard-card {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.dashboard-card .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 20px;
+}
+
+.dashboard-card .card-header h6 {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.dashboard-card .card-body {
+    padding: 20px;
+}
+
+/* PO Quick Data Styles */
+.po-quick-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.po-data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.po-data-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.po-data-label {
+    flex: 0 0 120px;
+    font-size: 0.85rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.po-data-value {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Comments Placeholder */
+.comments-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.comments-placeholder img {
+    max-width: 150px;
+    margin-bottom: 15px;
+}
+
+/* Progress Bar */
+.progress {
+    height: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+/* css/styles.css */
+.sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    transition: all 0.3s;
+}
+.sidebar.active {
+    margin-left: -250px;
+}
+.content {
+    width: 100%;
+    transition: all 0.3s;
+}
+.dashboard-card {
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.user-profile {
+    width: 35px;
+    height: 35px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.supplier-marker {
+    filter: hue-rotate(0deg) !important; /* Makes it red */
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    .search-input {
+        width: 200px;
+    }
+}

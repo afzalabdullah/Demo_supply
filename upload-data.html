@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Management System - Upload Data</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header d-flex align-items-center m-5 bg-light border-3">
+                <img src="Logo.png" alt="Logo" width="100" height="60" class="me-2">
+                
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="bi bi-house-door me-2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="po-dashboard.html">
+                        <i class="bi bi-box me-2"></i>
+                        PO Dashboard
+                    </a>
+                </li> -->
+                <li>
+                    <a href="combined-dashboard.html">
+                        <i class="bi bi-bar-chart me-2"></i>
+                        Combined Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="table-view.html">
+                        <i class="bi bi-table me-2"></i>
+                        Table View
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="upload-data.html">
+                        <i class="bi bi-upload me-2"></i>
+                        Upload Data
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-outline-light w-100">
+                    <i class="bi bi-box-arrow-left me-2"></i>
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content" class="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h5 class="mb-0 ms-3">Upload Section</h5>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3>Upload Data</h3>
+                    <button id="download-template-btn" class="btn btn-outline-primary">
+                        <i class="bi bi-download me-2"></i>
+                        Download Template
+                    </button>
+                </div>
+
+                <ul class="nav nav-tabs mb-4" id="uploadTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab">
+                            <i class="bi bi-upload me-2"></i>
+                            Upload File
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manual" type="button" role="tab">
+                            <i class="bi bi-file-text me-2"></i>
+                            Manual Entry
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">
+                            <i class="bi bi-clock-history me-2"></i>
+                            Upload History
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="uploadTabsContent">
+                    <div class="tab-pane fade show active" id="upload" role="tabpanel">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Upload PO Data</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-muted mb-4">Upload your Purchase Order data in CSV or Excel format</p>
+                                
+                                <div id="upload-zone" class="border border-2 border-dashed rounded-3 p-5 text-center mb-4">
+                                    <input type="file" id="file-input" class="d-none" accept=".csv,.xlsx,.xls">
+                                    <i class="bi bi-cloud-arrow-up display-4 text-muted mb-3"></i>
+                                    <h5>Drag and drop your file here</h5>
+                                    <p class="text-muted mb-3">or</p>
+                                    <button id="browse-btn" class="btn btn-primary px-4">Browse Files</button>
+                                    <p class="small text-muted mt-3">Supported formats: CSV, Excel (.xlsx, .xls)</p>
+                                </div>
+
+                                <div id="file-info" class="d-none bg-light p-3 rounded-3 mb-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-file-earmark-spreadsheet fs-4 text-primary me-3"></i>
+                                            <div>
+                                                <h6 id="file-name" class="mb-0"></h6>
+                                                <p id="file-size" class="small text-muted mb-0"></p>
+                                            </div>
+                                        </div>
+                                        <button id="remove-file-btn" class="btn btn-sm btn-light">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="upload-alert" class="alert d-none mb-4" role="alert"></div>
+
+                                <div class="d-flex justify-content-end">
+                                    <button id="clear-btn" class="btn btn-light me-2">Clear</button>
+                                    <button id="upload-btn" class="btn btn-primary">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="preview-card" class="card d-none">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Data Preview</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="preview-table" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <!-- Headers will be added dynamically -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Preview data will be added dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="small text-muted mt-2">Showing preview of the data to be imported</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="manual" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Manual Data Entry</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="manual-entry-form">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="po-number" class="form-label">PO Number</label>
+                                            <input type="text" class="form-control" id="po-number" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="supplier" class="form-label">Supplier</label>
+                                            <input type="text" class="form-control" id="supplier" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="po-date" class="form-label">PO Date</label>
+                                            <input type="date" class="form-control" id="po-date" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="expected-delivery" class="form-label">Expected Delivery</label>
+                                            <input type="date" class="form-control" id="expected-delivery">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" rows="2" required></textarea>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="quantity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="quantity" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="unit" class="form-label">Unit</label>
+                                            <input type="text" class="form-control" id="unit" placeholder="e.g., pcs, kg, etc.">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="unit-price" class="form-label">Unit Price</label>
+                                            <input type="number" step="0.01" class="form-control" id="unit-price" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="shipment-advice" class="form-label">Shipment Advice Number</label>
+                                            <input type="text" class="form-control" id="shipment-advice">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="grn-number" class="form-label">GRN Number</label>
+                                            <input type="text" class="form-control" id="grn-number">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" id="clear-form-btn" class="btn btn-light me-2">Clear</button>
+                                        <button type="submit" class="btn btn-primary">Save PO</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="history" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Upload History</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>File Name</th>
+                                                <th>Records</th>
+                                                <th>Status</th>
+                                                <th>Uploaded By</th>
+                                                <th class="text-end">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2023-04-10</td>
+                                                <td>po_data_april.csv</td>
+                                                <td>124</td>
+                                                <td><span class="badge bg-success">Success</span></td>
+                                                <td>admin@example.com</td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-light">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-03-15</td>
+                                                <td>po_data_march.xlsx</td>
+                                                <td>98</td>
+                                                <td><span class="badge bg-success">Success</span></td>
+                                                <td>admin@example.com</td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-light">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-02-28</td>
+                                                <td>po_data_feb.csv</td>
+                                                <td>112</td>
+                                                <td><span class="badge bg-danger">Failed</span></td>
+                                                <td>admin@example.com</td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-light">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/upload-data.js"></script>
+</body>
+</html>

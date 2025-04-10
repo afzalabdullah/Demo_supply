@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Management System - Combined Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header d-flex align-items-center m-5 bg-light border-3">
+                <img src="Logo.png" alt="Logo" width="100" height="60" class="me-2">
+                
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="bi bi-house-door me-2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="po-dashboard.html">
+                        <i class="bi bi-box me-2"></i>
+                        PO Dashboard
+                    </a>
+                </li> -->
+                <li class="active">
+                    <a href="combined-dashboard.html">
+                        <i class="bi bi-bar-chart me-2"></i>
+                        Combined Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="table-view.html">
+                        <i class="bi bi-table me-2"></i>
+                        Table View
+                    </a>
+                </li>
+                <li>
+                    <a href="upload-data.html">
+                        <i class="bi bi-upload me-2"></i>
+                        Upload Data
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-outline-light w-100">
+                    <i class="bi bi-box-arrow-left me-2"></i>
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content" class="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h5 class="mb-0 ms-3">Dashboard</h5>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3>Combined PO Dashboard</h3>
+                    <div class="d-flex">
+                        <select id="time-range" class="form-select me-2">
+                            <option value="week">Last Week</option>
+                            <option value="month" selected>Last Month</option>
+                            <option value="quarter">Last Quarter</option>
+                            <option value="year">Last Year</option>
+                        </select>
+                        <select id="supplier-filter" class="form-select">
+                            <option value="all" selected>All Suppliers</option>
+                            <!-- Supplier options will be added dynamically -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Total POs</h6>
+                                <h2 id="total-pos" class="card-title mb-0">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Total Value</h6>
+                                <h2 id="total-value" class="card-title mb-0">$0.00</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Pending Delivery</h6>
+                                <h2 id="pending-delivery" class="card-title mb-0">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Completed</h6>
+                                <h2 id="completed-pos" class="card-title mb-0">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">PO Status Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="status-chart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Supplier Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="supplier-chart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Monthly PO Trend</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="monthly-trend-chart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/combined-dashboard.js"></script>
+</body>
+</html>
